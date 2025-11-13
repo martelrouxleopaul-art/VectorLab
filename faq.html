@@ -11,7 +11,7 @@ body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var
 header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;z-index:1000}
 .logo{font-weight:700;font-size:34px}
 /* new: account / language container */
-.header-actions{display:flex;align-items:center;gap:12px;position:relative;right:0}
+.header-actions{display:flex;align-items:center;gap:20px; /* Increased gap */ position:relative;right:0}
 .auth-btn{padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
 /* new: login button style */
 #loginBtn5{background:var(--accent);color:var(--accent-hover);border:2px solid var(--accent-hover)}
@@ -20,9 +20,11 @@ header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;a
 #signInBtn5, #profileBtn5{background:var(--accent-hover);color:var(--accent);border:2px solid var(--accent-hover)}
 #signInBtn5:hover, #profileBtn5:hover{background:#ff8c6e}
 
-.lang-switch{position:relative;right:0;top:0;z-index:2000}
+.lang-switch{position:relative;right:0;top:0;z-index:3000; /* Increased z-index for fix */}
 .lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
 .lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s}
+.lang-circles.open .flag-en{left:-50px; /* Reduced from -70px for fix */}
+.lang-circles.open .flag-de{left:50px; /* Reduced from 70px for fix */}
 .lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:0}
 .lang-dropdown.show{display:block}
 main{max-width:800px;margin:80px auto;padding:0 6%}
@@ -106,7 +108,7 @@ function applyTranslations(lang){
 }
 function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
 
-/* --- Authentication Logic (Simulated) --- */
+/* --- Authentication Logic (Redirection) --- */
 const loginBtn = document.getElementById('loginBtn5');
 const signInBtn = document.getElementById('signInBtn5');
 const profileBtn = document.getElementById('profileBtn5');
@@ -117,18 +119,17 @@ function updateAuthButtons(isLoggedIn) {
   profileBtn.style.display = isLoggedIn ? 'block' : 'none';
 }
 
+// REDIRECT to Auth pages
 loginBtn.addEventListener('click', () => {
-  localStorage.setItem('isLoggedIn', 'true');
-  updateAuthButtons(true);
-  alert('Connexion réussie ! (Simulée)');
+  window.location.href = 'login.html';
 });
 
 signInBtn.addEventListener('click', () => {
-  alert('Redirection vers la page d\'inscription... (Simulée)');
+  window.location.href = 'signin.html';
 });
 
 profileBtn.addEventListener('click', () => {
-  alert('Affichage du profil... (Simulé)');
+  alert('Affichage du profil... Pour simuler la déconnexion, vous pouvez taper : localStorage.removeItem("isLoggedIn") dans la console.');
 });
 
 if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -144,8 +145,18 @@ langBtn.addEventListener('click', ()=>{ langBtn.classList.toggle('open'); dropdo
 dropdown.querySelectorAll('div').forEach(el=>el.addEventListener('click', ()=>{ setLang(el.dataset.lang); dropdown.classList.remove('show'); langBtn.classList.remove('open'); }));
 
 /* auto detect */
-async function autoDetect(){ try{ const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); let lang='en'; if(d.country_code==='FR') lang='fr'; else if(d.country_code==='DE'||d.country_code==='CH') lang='de'; setLang(localStorage.getItem('lang')||lang); }catch(e){ setLang(localStorage.getItem('lang')||'en'); } }
-const saved = localStorage.getItem('lang'); if(saved) setLang(saved); else autoDetect();
+async function autoDetect(){
+  try{
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    let lang='fr';
+    if(d.country_code==='DE'||d.country_code==='CH') lang='de';
+    else if(d.country_code!=='FR') lang = 'en';
+    setLang(localStorage.getItem('lang')||lang);
+  }catch(e){ setLang(localStorage.getItem('lang')||'fr'); }
+}
+const saved = localStorage.getItem('lang');
+if(saved) setLang(saved); else autoDetect();
 
 function toggleFAQ(el){
   const p = el.querySelector('p');

@@ -17,8 +17,8 @@ nav a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
 nav a:hover::after{width:100%}
 
 /* new: account / language container */
-.header-actions{display:flex;align-items:center;gap:12px;position:relative;right:0}
-.auth-btn{padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all .2s}
+.header-actions{display:flex;align-items:center;gap:20px; /* Increased gap */ position:relative;right:0}
+.auth-btn{padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
 /* new: login button style */
 #loginBtn2{background:var(--accent);color:var(--accent-hover);border:2px solid var(--accent-hover)}
 #loginBtn2:hover{background:#ffc7a8}
@@ -27,15 +27,15 @@ nav a:hover::after{width:100%}
 #signInBtn2:hover, #profileBtn2:hover{background:#ff8c6e}
 
 /* language switcher (position adjusted to be part of header-actions) */
-.lang-switch{position:relative;right:0;top:0;z-index:2000}
+.lang-switch{position:relative;right:0;top:0;z-index:3000; /* Increased z-index for fix */}
 .lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
 .lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s}
 .flag-en{left:0;top:0;z-index:1}
 .flag-fr{left:12px;top:0;z-index:2}
 .flag-de{left:24px;top:0;z-index:3}
-.lang-circles.open .flag-en{left:-70px;transform:translateY(-6px)}
+.lang-circles.open .flag-en{left:-50px; /* Reduced from -70px for fix */ transform:translateY(-6px)}
 .lang-circles.open .flag-fr{left:0;transform:translateY(-2px)}
-.lang-circles.open .flag-de{left:70px;transform:translateY(-6px)}
+.lang-circles.open .flag-de{left:50px; /* Reduced from 70px for fix */ transform:translateY(-6px)}
 .lang-dropdown{display:none;background:#fff;border-radius:12px;padding:8px;margin-top:8px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:left;position:absolute;right:0}
 .lang-dropdown.show{display:block}
 .lang-dropdown div{padding:8px 14px;border-radius:8px;cursor:pointer;transition:background .18s}
@@ -149,7 +149,7 @@ function setLang(lang){
   applyTranslations(lang);
 }
 
-/* --- Authentication Logic (Simulated) --- */
+/* --- Authentication Logic (Redirection) --- */
 const loginBtn = document.getElementById('loginBtn2');
 const signInBtn = document.getElementById('signInBtn2');
 const profileBtn = document.getElementById('profileBtn2');
@@ -161,19 +161,17 @@ function updateAuthButtons(isLoggedIn) {
   profileBtn.style.display = isLoggedIn ? 'block' : 'none';
 }
 
-// Simulated Login/Sign In (for demonstration)
+// REDIRECT to Auth pages
 loginBtn.addEventListener('click', () => {
-  localStorage.setItem('isLoggedIn', 'true');
-  updateAuthButtons(true);
-  alert('Connexion réussie ! (Simulée)');
+  window.location.href = 'login.html';
 });
 
 signInBtn.addEventListener('click', () => {
-  alert('Redirection vers la page d\'inscription... (Simulée)');
+  window.location.href = 'signin.html';
 });
 
 profileBtn.addEventListener('click', () => {
-  alert('Affichage du profil... (Simulé)');
+  alert('Affichage du profil... Pour simuler la déconnexion, vous pouvez taper : localStorage.removeItem("isLoggedIn") dans la console.');
 });
 
 // Check initial state on load
@@ -197,11 +195,11 @@ async function autoDetectLang(){
     const res = await fetch('https://ipapi.co/json/');
     const data = await res.json();
     const country = (data.country_code||'').toUpperCase();
-    let lang='en';
-    if(country==='FR') lang='fr';
-    else if(country==='DE' || country==='CH') lang='de';
+    let lang='fr';
+    if(country==='DE' || country==='CH') lang='de';
+    else if(country!=='FR') lang = 'en';
     setLang(localStorage.getItem('lang') || lang);
-  }catch(e){ setLang(localStorage.getItem('lang') || 'en'); }
+  }catch(e){ setLang(localStorage.getItem('lang') || 'fr'); }
 }
 const saved = localStorage.getItem('lang');
 if(saved) setLang(saved); else autoDetectLang();

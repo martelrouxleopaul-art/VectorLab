@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Connexion - VectorLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFCF8;--text:#2D2D2D;--text-light:#666;--accent:#FFD8BE;--accent-hover:#FF9D87}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh}
+header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;z-index:1000}
+.logo{font-weight:700;font-size:34px}
+nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500}
+
+/* Header fix */
+.header-actions{display:flex;align-items:center;gap:20px;position:relative;right:0}
+.lang-switch{position:relative;right:0;top:0;z-index:3000;padding-left:10px}
+.lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
+.lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s}
+.flag-en{left:0;top:0;z-index:1}.flag-fr{left:12px;top:0;z-index:2}.flag-de{left:24px;top:0;z-index:3}
+.lang-circles.open .flag-en{left:-50px;transform:translateY(-6px)}
+.lang-circles.open .flag-fr{left:0;transform:translateY(-2px)}
+.lang-circles.open .flag-de{left:50px;transform:translateY(-6px)}
+.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:0}
+.lang-dropdown.show{display:block}
+
+/* Form Styles */
+main{flex-grow:1;display:flex;justify-content:center;align-items:center;padding:50px 20px}
+.form-container{background:#fff;padding:40px;border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.05);max-width:400px;width:100%}
+h1{text-align:center;margin-bottom:24px;font-size:28px}
+form{display:flex;flex-direction:column;gap:16px}
+input{padding:12px 14px;border-radius:10px;border:1px solid #ffe8db;font-size:15px}
+.cta-button{background:var(--accent-hover);color:#fff;padding:12px 18px;border-radius:30px;border:none;font-weight:700;cursor:pointer;transition:background .2s}
+.cta-button:hover{background:#ff8c6e}
+.message{text-align:center;margin-top:10px;font-weight:600;display:none;padding:10px;border-radius:8px}
+.error{color:#D9534F;background:#F9EBEB;border:1px solid #E4C4C4}
+.success{color:green;background:#EBF9EB;border:1px solid #C4E4C4}
+.switch-auth{text-align:center;margin-top:20px;font-size:14px}
+.switch-auth a{color:var(--accent-hover);text-decoration:none;font-weight:600}
+
+/* Footer */
+footer{text-align:center;padding:30px 20px;color:var(--text-light);border-top:1px solid #ffe8db}
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">VectorLab</a></div>
+    <nav>
+      <a href="index.html" data-i18n="nav_home">Accueil</a>
+      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+      <a href="about.html" data-i18n="nav_about">À propos</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
+  </div>
+
+  <div class="header-actions">
+    <div class="lang-switch">
+      <div class="lang-circles" id="langBtn6">
+        <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
+        <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
+        <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+      </div>
+      <div class="lang-dropdown" id="langDropdown6">
+        <div data-lang="en">English</div>
+        <div data-lang="fr">Français</div>
+        <div data-lang="de">Deutsch</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="form-container">
+    <h1 data-i18n="login_title">Se connecter à VectorLab</h1>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required data-i18n-placeholder="placeholder_email">
+      <input type="password" id="loginPassword" placeholder="Mot de passe" required data-i18n-placeholder="placeholder_password">
+      <button type="submit" class="cta-button" data-i18n="auth_login">Se connecter</button>
+      <div id="loginMessage" class="message"></div>
+    </form>
+    <div class="switch-auth">
+      <span data-i18n="login_no_account">Pas encore de compte ?</span>
+      <a href="signin.html" data-i18n="auth_signin">S'inscrire</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</p>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    nav_home:"Home", nav_discover:"Discover", nav_about:"About", nav_contact:"Contact", nav_faq:"FAQ",
+    footer_text:"© 2025 VectorLab — Premium & custom 3D printing",
+    login_title:"Log in to VectorLab", auth_login:"Log In", login_no_account:"Don't have an account yet?",
+    placeholder_email:"Email", placeholder_password:"Password", auth_signin:"Sign Up",
+    msg_success:"Login successful! Redirecting...", msg_error:"Invalid email or password."
+  },
+  fr: {
+    nav_home:"Accueil", nav_discover:"Découvrir", nav_about:"À propos", nav_contact:"Contact", nav_faq:"FAQ",
+    footer_text:"© 2025 VectorLab — Fait avec passion en France",
+    login_title:"Se connecter à VectorLab", auth_login:"Se connecter", login_no_account:"Pas encore de compte ?",
+    placeholder_email:"Email", placeholder_password:"Mot de passe", auth_signin:"S'inscrire",
+    msg_success:"Connexion réussie ! Redirection...", msg_error:"Email ou mot de passe incorrect."
+  },
+  de: {
+    nav_home:"Startseite", nav_discover:"Entdecken", nav_about:"Über uns", nav_contact:"Kontakt", nav_faq:"FAQ",
+    footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
+    login_title:"Bei VectorLab anmelden", auth_login:"Anmelden", login_no_account:"Noch kein Konto?",
+    placeholder_email:"E-Mail", placeholder_password:"Passwort", auth_signin:"Registrieren",
+    msg_success:"Anmeldung erfolgreich! Weiterleitung...", msg_error:"Ungültige E-Mail oder Passwort."
+  }
+};
+
+function applyTranslations(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.dataset.i18nPlaceholder;
+    el.placeholder = (translations[lang] && translations[lang][key]) || translations['en'][key];
+  });
+}
+function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
+
+/* --- Auth Form Logic --- */
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const messageEl = document.getElementById('loginMessage');
+  const lang = localStorage.getItem('lang') || 'fr';
+  const successMsg = translations[lang]['msg_success'] || translations['en']['msg_success'];
+  const errorMsg = translations[lang]['msg_error'] || translations['en']['msg_error'];
+
+  // SIMULATION: Check against a fixed user or just validate presence
+  if (email && password && password.length >= 6) {
+    messageEl.textContent = successMsg;
+    messageEl.className = 'message success';
+    messageEl.style.display = 'block';
+    
+    // Simulate successful login
+    localStorage.setItem('isLoggedIn', 'true');
+    
+    // Redirect to home page or profile after 1.5s
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1500);
+  } else {
+    messageEl.textContent = errorMsg;
+    messageEl.className = 'message error';
+    messageEl.style.display = 'block';
+  }
+});
+
+/* --- Lang Switch Logic --- */
+const langBtn = document.getElementById('langBtn6');
+const dropdown = document.getElementById('langDropdown6');
+langBtn.addEventListener('click', ()=>{ 
+  langBtn.classList.toggle('open'); 
+  dropdown.classList.toggle('show'); 
+  dropdown.setAttribute('aria-hidden', String(!dropdown.classList.contains('show')));
+});
+dropdown.querySelectorAll('div').forEach(el=>el.addEventListener('click', ()=>{ 
+  setLang(el.dataset.lang); 
+  dropdown.classList.remove('show'); 
+  langBtn.classList.remove('open'); 
+}));
+
+/* Init */
+const saved = localStorage.getItem('lang');
+if(saved) setLang(saved);
+else {
+  // Simplified auto-detect for new files
+  if (navigator.language.startsWith('fr')) setLang('fr');
+  else if (navigator.language.startsWith('de')) setLang('de');
+  else setLang('en');
+}
+</script>
+</body>
+</html>
