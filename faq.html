@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - VectorLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFCF8;--text:#2D2D2D;--text-light:#666;--accent:#FFD8BE;--accent-hover:#FF9D87;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+header{padding:25px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;position:sticky;top:0;background:var(--bg);z-index:1000;transition:0.3s;}
+header.scrolled{background:#fff;box-shadow:0 5px 20px rgba(0,0,0,0.05);}
+.logo{font-size:36px;font-weight:700;}
+nav a{margin-left:40px;color:var(--text);text-decoration:none;font-weight:500;position:relative;}
+nav a::after{content:'';position:absolute;width:0;height:2px;background:var(--accent-hover);left:0;bottom:-5px;transition:0.3s;}
+nav a:hover::after{width:100%;}
+
+section{max-width:800px;margin:100px auto;padding:0 5%;}
+h1{text-align:center;font-size:44px;margin-bottom:40px;}
+.faq-item{background:white;border-radius:15px;padding:25px;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,0.05);cursor:pointer;transition:0.3s;}
+.faq-item:hover{transform:translateY(-3px);}
+.faq-item h3{font-size:20px;display:flex;justify-content:space-between;align-items:center;}
+.faq-item p{margin-top:10px;color:var(--text-light);display:none;}
+footer{text-align:center;padding:80px 20px;color:var(--text-light);border-top:1px solid #ffe8db;}
+footer .links a{color:var(--text-light);text-decoration:none;margin:0 10px;transition:0.3s;}
+footer .links a:hover{color:var(--accent-hover);}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="discover.html">Découvrir</a>
+    <a href="about.html">À propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h1>Foire Aux Questions</h1>
+
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <h3>Quels matériaux utilisez-vous ? <span>+</span></h3>
+    <p>Nous utilisons principalement du PLA recyclé et biodégradable, ainsi que du PETG pour les pièces techniques.</p>
+  </div>
+
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <h3>Est-il possible de personnaliser un objet ? <span>+</span></h3>
+    <p>Oui, nous proposons la personnalisation via gravure, couleur, ou design sur mesure selon votre demande.</p>
+  </div>
+
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <h3>Quels sont les délais de fabrication ? <span>+</span></h3>
+    <p>Nos délais varient entre 3 et 7 jours ouvrés selon la complexité du modèle.</p>
+  </div>
+
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <h3>Livrez-vous à l'international ? <span>+</span></h3>
+    <p>Actuellement, nous livrons uniquement en Europe. L’expansion internationale est prévue pour bientôt !</p>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="index.html">Accueil</a>|
+    <a href="discover.html">Découvrir</a>|
+    <a href="about.html">À propos</a>|
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© 2025 VectorLab — Fait avec passion en France</p>
+</footer>
+
+<script>
+function toggleFAQ(el){
+  const p=el.querySelector("p");
+  const sign=el.querySelector("span");
+  const open=p.style.display==="block";
+  document.querySelectorAll(".faq-item p").forEach(x=>x.style.display="none");
+  document.querySelectorAll(".faq-item span").forEach(x=>x.textContent="+");
+  if(!open){p.style.display="block";sign.textContent="-";}
+}
+window.addEventListener("scroll",()=>{document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50)});
+</script>
+</body>
+</html>

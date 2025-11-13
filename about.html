@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos - VectorLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FFFCF8; --text:#2D2D2D; --text-light:#666; --accent:#FFD8BE; --accent-hover:#FF9D87;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+header{padding:25px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;position:sticky;top:0;background:var(--bg);z-index:1000;transition:0.3s;}
+header.scrolled{background:#fff;box-shadow:0 5px 20px rgba(0,0,0,0.05);}
+.logo{font-size:36px;font-weight:700;}
+nav a{margin-left:40px;color:var(--text);text-decoration:none;font-weight:500;position:relative;}
+nav a::after{content:'';position:absolute;width:0;height:2px;background:var(--accent-hover);left:0;bottom:-5px;transition:0.3s;}
+nav a:hover::after{width:100%;}
+
+section{max-width:1100px;margin:100px auto;padding:0 5%;line-height:1.8;}
+h1{font-size:46px;margin-bottom:20px;}
+h2{margin-top:50px;margin-bottom:15px;color:var(--accent-hover);}
+p{color:var(--text-light);margin-bottom:20px;}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-top:60px;}
+.card{background:white;border-radius:20px;padding:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+.card img{width:100%;border-radius:15px;margin-bottom:15px;}
+footer{text-align:center;padding:80px 20px;color:var(--text-light);border-top:1px solid #ffe8db;}
+footer .links a{color:var(--text-light);text-decoration:none;margin:0 10px;transition:0.3s;}
+footer .links a:hover{color:var(--accent-hover);}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="discover.html">Découvrir</a>
+    <a href="about.html">À propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h1>Notre histoire</h1>
+  <p>Fondé en 2022, <strong>VectorLab</strong> est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.</p>
+  <p>Notre atelier, situé en France, s’engage à produire localement tout en innovant pour rendre l’impression 3D plus accessible, esthétique et écoresponsable.</p>
+
+  <h2>Notre mission</h2>
+  <p>Offrir des créations sur mesure, alliant technologie, art et respect de l’environnement. Chaque pièce est imprimée avec précision, puis finie à la main pour garantir un rendu unique.</p>
+
+  <h2>Notre équipe</h2>
+  <div class="team">
+    <div class="card">
+      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Julien" alt="Julien">
+      <h3>Julien</h3>
+      <p>Designer & Fondateur</p>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Clara" alt="Clara">
+      <h3>Clara</h3>
+      <p>Responsable production</p>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Lucas" alt="Lucas">
+      <h3>Lucas</h3>
+      <p>Développeur & R&D</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="index.html">Accueil</a>|
+    <a href="discover.html">Découvrir</a>|
+    <a href="faq.html">FAQ</a>|
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© 2025 VectorLab — Fait avec passion en France</p>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50)});
+</script>
+</body>
+</html>
+

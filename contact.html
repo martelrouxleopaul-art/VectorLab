@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - VectorLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFCF8;--text:#2D2D2D;--text-light:#666;--accent:#FFD8BE;--accent-hover:#FF9D87;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+header{padding:25px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;position:sticky;top:0;background:var(--bg);z-index:1000;transition:0.3s;}
+header.scrolled{background:#fff;box-shadow:0 5px 20px rgba(0,0,0,0.05);}
+.logo{font-size:36px;font-weight:700;}
+nav a{margin-left:40px;color:var(--text);text-decoration:none;font-weight:500;position:relative;}
+nav a::after{content:'';position:absolute;width:0;height:2px;background:var(--accent-hover);left:0;bottom:-5px;transition:0.3s;}
+nav a:hover::after{width:100%;}
+
+section{max-width:800px;margin:100px auto;padding:0 5%;text-align:center;}
+h1{font-size:42px;margin-bottom:15px;}
+p{color:var(--text-light);margin-bottom:40px;}
+form{display:flex;flex-direction:column;gap:20px;text-align:left;}
+input,textarea{width:100%;padding:15px 20px;border:1px solid #ffe8db;border-radius:12px;font-size:16px;}
+button{background:var(--accent-hover);color:white;padding:15px 40px;border:none;border-radius:40px;font-size:17px;font-weight:600;cursor:pointer;transition:0.3s;}
+button:hover{transform:translateY(-3px);background:#ff8c6e;}
+footer{text-align:center;padding:80px 20px;color:var(--text-light);border-top:1px solid #ffe8db;}
+footer .links a{color:var(--text-light);text-decoration:none;margin:0 10px;transition:0.3s;}
+footer .links a:hover{color:var(--accent-hover);}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="discover.html">Découvrir</a>
+    <a href="about.html">À propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h1>Contactez-nous</h1>
+  <p>Une question, un projet ou une demande sur mesure ? Écrivez-nous !</p>
+  <form onsubmit="event.preventDefault(); alert('Message envoyé ! Merci ❤️');">
+    <input type="text" placeholder="Votre nom" required>
+    <input type="email" placeholder="Votre e-mail" required>
+    <textarea rows="6" placeholder="Votre message..." required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="index.html">Accueil</a>|
+    <a href="discover.html">Découvrir</a>|
+    <a href="faq.html">FAQ</a>|
+    <a href="about.html">À propos</a>
+  </div>
+  <p>© 2025 VectorLab — Fait avec passion en France</p>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50)});
+</script>
+</body>
+</html>

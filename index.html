@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VectorLab - Impression 3D Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFCF8;
+  --card: #FFF8F3;
+  --text: #2D2D2D;
+  --text-light: #666666;
+  --accent: #FFD8BE;
+  --accent-hover: #FF9D87;
+}
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x:hidden;}
+
+/* --- HEADER --- */
+header {
+  padding: 25px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffe8db;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+header.scrolled { background: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.logo {font-size: 36px; font-weight: 700; letter-spacing: -1.5px;}
+nav {display:flex; align-items:center;}
+nav a {
+  margin-left: 40px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--accent-hover);
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+nav a:hover::after {width:100%;}
+
+/* --- HERO --- */
+.hero {
+  text-align: center;
+  padding: 140px 20px 100px;
+  background: linear-gradient(135deg, #fff8f3 0%, #fff2eb 100%);
+  animation: fadeIn 1s ease-in-out;
+}
+.hero h1 {font-size: 58px; font-weight: 700; margin-bottom: 20px; letter-spacing: -2px;}
+.hero p {font-size: 22px; color: var(--text-light); max-width: 700px; margin: 0 auto 50px;}
+.cta {
+  background: var(--accent-hover);
+  color: white;
+  padding: 20px 50px;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(255,157,135,0.3);
+  transition: 0.3s;
+}
+.cta:hover {transform: translateY(-5px); background: #ff8c6e;}
+
+/* --- PRESENTATION SECTION --- */
+.presentation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 100px 8%;
+  max-width: 1200px;
+  margin: auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s;
+}
+.presentation.visible {opacity:1; transform:translateY(0);}
+.presentation img {width: 45%; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);}
+.presentation .text {flex:1;}
+.presentation h2 {font-size: 36px; margin-bottom: 20px;}
+.presentation p {color: var(--text-light); font-size: 18px; margin-bottom: 30px;}
+.presentation .cta2 {
+  background: var(--accent);
+  color: #000;
+  padding: 15px 40px;
+  border-radius: 40px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.presentation .cta2:hover {background: var(--accent-hover); color: white;}
+
+/* --- CAROUSEL --- */
+.carousel {max-width:1200px; margin:100px auto; overflow:hidden; padding:0 5%;}
+.carousel-track {display:flex; animation:scroll 25s linear infinite;}
+.carousel-item {min-width:360px; margin:0 15px; background:white; padding:40px 30px; border-radius:24px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.05); border:2px solid var(--accent);}
+.carousel-item h3 {font-size:22px; margin-bottom:12px; color:var(--accent-hover);}
+@keyframes scroll {0%{transform:translateX(0);} 100%{transform:translateX(-50%);}}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 80px 20px 40px;
+  color: var(--text-light);
+  border-top: 1px solid #ffe8db;
+  font-size: 15px;
+}
+footer .links {margin-bottom: 20px;}
+footer .links a {color: var(--text-light); text-decoration:none; margin:0 10px; transition:0.3s;}
+footer .links a:hover {color: var(--accent-hover);}
+
+@keyframes fadeIn {from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="discover.html">Découvrir</a>
+    <a href="about.html">À propos</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Impression 3D<br>sur mesure & premium</h1>
+  <p>Objets uniques, fabriqués avec soin en France.</p>
+  <a href="discover.html"><button class="cta">Découvrir la collection</button></a>
+</section>
+
+<section class="presentation" id="presentation">
+  <img src="https://via.placeholder.com/600x400/FFF8F3/FFD8BE?text=Atelier+VectorLab" alt="Atelier VectorLab">
+  <div class="text">
+    <h2>Notre savoir-faire</h2>
+    <p>Chez VectorLab, chaque création est imprimée avec précision et finie à la main. Nous allions design, durabilité et personnalisation pour donner vie à vos idées en 3D.</p>
+    <a href="about.html"><button class="cta2">En savoir plus</button></a>
+  </div>
+</section>
+
+<div class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item"><h3>Promo -25%</h3><p>sur toute la collection sous-verres jusqu’au 30 novembre</p></div>
+    <div class="carousel-item"><h3>Nouveauté</h3><p>Pots à fleurs en PLA recyclé & teintes naturelles</p></div>
+    <div class="carousel-item"><h3>Atelier gratuit</h3><p>Initiez-vous à l’impression 3D le 22 novembre</p></div>
+    <div class="carousel-item"><h3>Livraison offerte</h3><p>à partir de 60€ d’achat</p></div>
+  </div>
+</div>
+
+<footer>
+  <div class="links">
+    <a href="discover.html">Découvrir</a>|
+    <a href="about.html">À propos</a>|
+    <a href="faq.html">FAQ</a>|
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© 2025 VectorLab — Impression 3D premium & personnalisée</p>
+</footer>
+
+<script>
+window.addEventListener("scroll", ()=>{
+  document.getElementById("mainHeader").classList.toggle("scrolled", window.scrollY>50);
+});
+
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
+  });
+},{threshold:0.2});
+obs.observe(document.getElementById("presentation"));
+</script>
+</body>
+</html>
