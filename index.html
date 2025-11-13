@@ -1,246 +1,259 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>VectorLab - Impression 3D Premium</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #FFFCF8;
-  --card: #FFF8F3;
-  --text: #2D2D2D;
-  --text-light: #666666;
-  --accent: #FFD8BE;
-  --accent-hover: #FF9D87;
+:root{
+  --bg:#FFFCF8; --card:#FFF8F3; --text:#2D2D2D; --text-light:#666666;
+  --accent:#FFD8BE; --accent-hover:#FF9D87;
 }
-* {margin:0; padding:0; box-sizing:border-box;}
-body {font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x:hidden;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 
-/* --- HEADER --- */
-header {
-  padding: 25px 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ffe8db;
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 1000;
-  transition: background 0.3s, box-shadow 0.3s;
-}
-header.scrolled { background: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-.logo {font-size: 36px; font-weight: 700; letter-spacing: -1.5px;}
-nav {display:flex; align-items:center;}
-nav a {
-  margin-left: 40px;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-}
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background: var(--accent-hover);
-  left: 0;
-  bottom: -5px;
-  transition: 0.3s;
-}
-nav a:hover::after {width:100%;}
+/* header */
+header{position:sticky;top:0;z-index:1000;background:var(--bg);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;transition:box-shadow .25s,background .25s}
+header.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.06);background:#fff}
+.logo{font-weight:700;font-size:34px;letter-spacing:-1px}
+nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500;position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--accent-hover);transition:width .25s}
+nav a:hover::after{width:100%}
 
-/* --- HERO --- */
-.hero {
-  text-align: center;
-  padding: 140px 20px 100px;
-  background: linear-gradient(135deg, #fff8f3 0%, #fff2eb 100%);
-  position: relative;
-  overflow: hidden;
-  animation: fadeIn 1s ease-in-out;
+/* language switch */
+.lang-switch{position:absolute;right:24px;top:14px;z-index:2000}
+.lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
+.lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s cubic-bezier(.2,.9,.2,1)}
+.flag-en{left:0;top:0;z-index:1}
+.flag-fr{left:12px;top:0;z-index:2}
+.flag-de{left:24px;top:0;z-index:3}
+.lang-circles.open .flag-en{left:-70px;transform:translateY(-6px)}
+.lang-circles.open .flag-fr{left:0;transform:translateY(-2px)}
+.lang-circles.open .flag-de{left:70px;transform:translateY(-6px)}
+.lang-dropdown{display:none;background:#fff;border-radius:12px;padding:8px;margin-top:8px;box-shadow:0 12px 30px rgba(0,0,0,.08);text-align:left}
+.lang-dropdown.show{display:block}
+.lang-dropdown div{padding:8px 14px;border-radius:8px;cursor:pointer;transition:background .18s}
+.lang-dropdown div:hover{background:var(--accent)}
+/* small screens */
+@media (max-width:640px){
+  nav a{display:none}
+  .lang-switch{right:12px}
 }
 
-/* vague foncée animée */
-/* vague foncée discrète */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 40%;              /* hauteur de la vague : à mi-hauteur */
-  left: -200px;          /* démarre hors de l’écran */
-  width: 300px;          /* largeur de la vague (fine) */
-  height: 60px;          /* épaisseur de la vague */
-  
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255,157,135,0.35) 0%,   /* centre foncé */
-    rgba(255,157,135,0.15) 50%,  /* adoucissement */
-    rgba(255,157,135,0) 100%     /* fade-out total */
-  );
+/* hero */
+.hero{position:relative;text-align:center;padding:120px 20px 90px;background:linear-gradient(135deg,#fff8f3 0%,#fff2eb 100%);overflow:hidden}
+.hero h1{font-size:48px;line-height:1.02;margin-bottom:18px;z-index:2;position:relative}
+.hero p{max-width:720px;margin:0 auto 28px;color:var(--text-light);z-index:2;position:relative}
+.cta{background:var(--accent-hover);color:#fff;padding:16px 44px;border-radius:42px;border:none;font-weight:700;cursor:pointer;box-shadow:0 18px 44px rgba(255,141,110,.18);transition:transform .25s,background .25s;z-index:2;position:relative}
+.cta:hover{transform:translateY(-6px);background:#ff8c6e}
 
-  border-radius: 50%;
-  filter: blur(25px);     /* effet doux / vague */
-  animation: waveSmall 5s infinite ease-in-out;
-  pointer-events: none;
-  z-index: 1;
+/* narrow dark wave (fine + fade in/out) */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:48%;
+  left:-260px;
+  width:300px;
+  height:60px;
+  background:radial-gradient(ellipse at center,
+    rgba(255,126,86,0.34) 0%,
+    rgba(255,126,86,0.18) 50%,
+    rgba(255,126,86,0) 100%);
+  border-radius:50%;
+  filter:blur(22px);
+  transform:translateY(-50%);
+  z-index:1;
+  animation:waveSmall 5.6s infinite ease-in-out;
+  pointer-events:none;
+}
+@keyframes waveSmall{
+  0%{transform:translateX(-150%) scale(.85);opacity:0}
+  18%{opacity:1}
+  48%{transform:translateX(50%) scale(1);opacity:.6}
+  82%{opacity:1}
+  100%{transform:translateX(160%) scale(.85);opacity:0}
 }
 
-@keyframes waveSmall {
-  0% {
-    transform: translateX(-150%) scale(0.8);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(50%) scale(1);
-    opacity: 0.5;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(150%) scale(0.8);
-    opacity: 0;
-  }
-}
+/* presentation */
+.presentation{max-width:1200px;margin:56px auto;padding:72px 6%;display:flex;gap:48px;align-items:center;opacity:0;transform:translateY(18px);transition:all .9s}
+.presentation.visible{opacity:1;transform:none}
+.presentation img{width:48%;border-radius:18px;box-shadow:0 18px 44px rgba(0,0,0,.08)}
+.presentation .text h2{font-size:28px;margin-bottom:12px}
+.presentation .text p{color:var(--text-light);margin-bottom:18px}
 
+/* carousel */
+.carousel{max-width:1200px;margin:68px auto;padding:0 6%;overflow:hidden}
+.carousel-track{display:flex;animation:scroll 25s linear infinite}
+.carousel-item{min-width:340px;margin:0 12px;background:#fff;padding:26px;border-radius:18px;box-shadow:0 12px 38px rgba(0,0,0,.04);border:2px solid var(--accent)}
+.carousel-item h3{color:var(--accent-hover);font-size:18px;margin-bottom:10px}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-@keyframes waveMove {
-  0% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(0%) translateY(3%); }
-  100% { transform: translateX(50%) translateY(0); }
-}
+/* footer */
+footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1px solid #ffe8db;margin-top:40px}
+footer .links a{color:var(--text-light);text-decoration:none;margin:0 8px}
 
-.hero h1 {font-size: 58px; font-weight: 700; margin-bottom: 20px; letter-spacing: -2px; position: relative; z-index: 2;}
-.hero p {font-size: 22px; color: var(--text-light); max-width: 700px; margin: 0 auto 50px; position: relative; z-index: 2;}
-.cta {
-  background: var(--accent-hover);
-  color: white;
-  padding: 20px 50px;
-  border: none;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 15px 40px rgba(255,157,135,0.3);
-  transition: 0.3s;
-  position: relative;
-  z-index: 2;
-}
-.cta:hover {transform: translateY(-5px); background: #ff8c6e;}
-
-/* --- PRESENTATION SECTION --- */
-.presentation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 80px;
-  padding: 100px 8%;
-  max-width: 1200px;
-  margin: auto;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s;
-}
-.presentation.visible {opacity:1; transform:translateY(0);}
-.presentation img {width: 45%; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);}
-.presentation .text {flex:1;}
-.presentation h2 {font-size: 36px; margin-bottom: 20px;}
-.presentation p {color: var(--text-light); font-size: 18px; margin-bottom: 30px;}
-.presentation .cta2 {
-  background: var(--accent);
-  color: #000;
-  padding: 15px 40px;
-  border-radius: 40px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.presentation .cta2:hover {background: var(--accent-hover); color: white;}
-
-/* --- CAROUSEL --- */
-.carousel {max-width:1200px; margin:100px auto; overflow:hidden; padding:0 5%;}
-.carousel-track {display:flex; animation:scroll 25s linear infinite;}
-.carousel-item {min-width:360px; margin:0 15px; background:white; padding:40px 30px; border-radius:24px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.05); border:2px solid var(--accent);}
-.carousel-item h3 {font-size:22px; margin-bottom:12px; color:var(--accent-hover);}
-@keyframes scroll {0%{transform:translateX(0);} 100%{transform:translateX(-50%);}}
-
-/* --- FOOTER --- */
-footer {
-  text-align: center;
-  padding: 80px 20px 40px;
-  color: var(--text-light);
-  border-top: 1px solid #ffe8db;
-  font-size: 15px;
-}
-footer .links {margin-bottom: 20px;}
-footer .links a {color: var(--text-light); text-decoration:none; margin:0 10px; transition:0.3s;}
-footer .links a:hover {color: var(--accent-hover);}
-
-@keyframes fadeIn {from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);}}
+/* small tweaks */
+[data-i18n]{transition:all .2s}
 </style>
 </head>
 <body>
 
 <header id="mainHeader">
-  <div class="logo">VectorLab</div>
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="discover.html">Découvrir</a>
-    <a href="about.html">À propos</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="logo">VectorLab</div>
+    <nav>
+      <a href="index.html" data-i18n="nav_home">Accueil</a>
+      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+      <a href="about.html" data-i18n="nav_about">À propos</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- language switcher -->
+  <div class="lang-switch" aria-hidden="false">
+    <div class="lang-circles" id="langBtn" title="Langues">
+      <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
+      <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
+      <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+    </div>
+    <div class="lang-dropdown" id="langDropdown" role="menu" aria-hidden="true">
+      <div data-lang="en">English</div>
+      <div data-lang="fr">Français</div>
+      <div data-lang="de">Deutsch</div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>Impression 3D<br>sur mesure & premium</h1>
-  <p>Objets uniques, fabriqués avec soin en France.</p>
-  <a href="discover.html"><button class="cta">Découvrir la collection</button></a>
-</section>
+<main>
+  <section class="hero">
+    <h1 data-i18n="hero_title">Impression 3D<br>sur mesure & premium</h1>
+    <p data-i18n="hero_sub">Objets uniques, fabriqués avec soin en France.</p>
+    <button class="cta" data-i18n="discover_btn">Découvrir la collection</button>
+  </section>
 
-<section class="presentation" id="presentation">
-  <img src="https://via.placeholder.com/600x400/FFF8F3/FFD8BE?text=Atelier+VectorLab" alt="Atelier VectorLab">
-  <div class="text">
-    <h2>Notre savoir-faire</h2>
-    <p>Chez VectorLab, chaque création est imprimée avec précision et finie à la main. Nous allions design, durabilité et personnalisation pour donner vie à vos idées en 3D.</p>
-    <a href="about.html"><button class="cta2">En savoir plus</button></a>
-  </div>
-</section>
+  <section class="presentation" id="presentation">
+    <img src="https://via.placeholder.com/680x420/FFF8F3/FFD8BE?text=Atelier+VectorLab" alt="">
+    <div class="text">
+      <h2 data-i18n="presentation_title">Notre savoir-faire</h2>
+      <p data-i18n="presentation_text">Chez VectorLab, chaque création est imprimée avec précision et finie à la main. Nous allions design, durabilité et personnalisation pour donner vie à vos idées en 3D.</p>
+      <a href="about.html"><button class="cta" data-i18n="presentation_btn">En savoir plus</button></a>
+    </div>
+  </section>
 
-<div class="carousel">
-  <div class="carousel-track">
-    <div class="carousel-item"><h3>Promo -25%</h3><p>sur toute la collection sous-verres jusqu’au 30 novembre</p></div>
-    <div class="carousel-item"><h3>Nouveauté</h3><p>Pots à fleurs en PLA recyclé & teintes naturelles</p></div>
-    <div class="carousel-item"><h3>Atelier gratuit</h3><p>Initiez-vous à l’impression 3D le 22 novembre</p></div>
-    <div class="carousel-item"><h3>Livraison offerte</h3><p>à partir de 60€ d’achat</p></div>
+  <div class="carousel" aria-hidden="false">
+    <div class="carousel-track">
+      <div class="carousel-item"><h3 data-i18n="promo1_title">Promo -25%</h3><p data-i18n="promo1_text">sur toute la collection sous-verres jusqu’au 30 novembre</p></div>
+      <div class="carousel-item"><h3 data-i18n="promo2_title">Nouveauté</h3><p data-i18n="promo2_text">Pots à fleurs en PLA recyclé & teintes naturelles</p></div>
+      <div class="carousel-item"><h3 data-i18n="promo3_title">Atelier gratuit</h3><p data-i18n="promo3_text">Initiez-vous à l’impression 3D le 22 novembre</p></div>
+      <div class="carousel-item"><h3 data-i18n="promo4_title">Livraison offerte</h3><p data-i18n="promo4_text">à partir de 60€ d’achat</p></div>
+      <!-- duplicated items to allow seamless loop -->
+      <div class="carousel-item"><h3>Promo -25%</h3><p>sur toute la collection sous-verres jusqu’au 30 novembre</p></div>
+      <div class="carousel-item"><h3>Nouveauté</h3><p>Pots à fleurs en PLA recyclé & teintes naturelles</p></div>
+    </div>
   </div>
-</div>
+</main>
 
 <footer>
   <div class="links">
-    <a href="discover.html">Découvrir</a>|
-    <a href="about.html">À propos</a>|
-    <a href="faq.html">FAQ</a>|
-    <a href="contact.html">Contact</a>
+    <a href="discover.html" data-i18n="nav_discover">Découvrir</a> |
+    <a href="about.html" data-i18n="nav_about">À propos</a> |
+    <a href="faq.html" data-i18n="nav_faq">FAQ</a> |
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
   </div>
-  <p>© 2025 VectorLab — Impression 3D premium & personnalisée</p>
+  <p data-i18n="footer_text">© 2025 VectorLab — Impression 3D premium & personnalisée</p>
 </footer>
 
 <script>
-window.addEventListener("scroll", ()=>{
-  document.getElementById("mainHeader").classList.toggle("scrolled", window.scrollY>50);
+/* --- language / translations --- */
+const translations = {
+  en: {
+    nav_home:"Home", nav_discover:"Discover", nav_about:"About", nav_contact:"Contact", nav_faq:"FAQ",
+    hero_title:"Premium & custom 3D printing", hero_sub:"Unique objects made with care in France.", discover_btn:"Discover the collection",
+    presentation_title:"Our expertise", presentation_text:"At VectorLab, every creation is printed precisely and hand-finished. We combine design, sustainability and personalization to bring your ideas to life in 3D.", presentation_btn:"Learn more",
+    promo1_title:"Sale -25%", promo1_text:"on coasters collection until November 30", promo2_title:"New", promo2_text:"Flower pots in recycled PLA & natural tones", promo3_title:"Free workshop", promo3_text:"Intro to 3D printing on Nov 22", promo4_title:"Free shipping", promo4_text:"from €60 order",
+    footer_text:"© 2025 VectorLab — Premium & custom 3D printing"
+  },
+  fr: {
+    nav_home:"Accueil", nav_discover:"Découvrir", nav_about:"À propos", nav_contact:"Contact", nav_faq:"FAQ",
+    hero_title:"Impression 3D sur mesure & premium", hero_sub:"Objets uniques, fabriqués avec soin en France.", discover_btn:"Découvrir la collection",
+    presentation_title:"Notre savoir-faire", presentation_text:"Chez VectorLab, chaque création est imprimée avec précision et finie à la main. Nous allions design, durabilité et personnalisation pour donner vie à vos idées en 3D.", presentation_btn:"En savoir plus",
+    promo1_title:"Promo -25%", promo1_text:"sur toute la collection sous-verres jusqu’au 30 novembre", promo2_title:"Nouveauté", promo2_text:"Pots à fleurs en PLA recyclé & teintes naturelles", promo3_title:"Atelier gratuit", promo3_text:"Initiez-vous à l’impression 3D le 22 novembre", promo4_title:"Livraison offerte", promo4_text:"à partir de 60€ d’achat",
+    footer_text:"© 2025 VectorLab — Impression 3D premium & personnalisée"
+  },
+  de: {
+    nav_home:"Startseite", nav_discover:"Entdecken", nav_about:"Über uns", nav_contact:"Kontakt", nav_faq:"FAQ",
+    hero_title:"Premium & maßgeschneiderter 3D-Druck", hero_sub:"Einzigartige Objekte, mit Sorgfalt in Frankreich hergestellt.", discover_btn:"Kollektion entdecken",
+    presentation_title:"Unser Know-how", presentation_text:"Bei VectorLab wird jedes Objekt präzise gedruckt und von Hand veredelt. Wir verbinden Design, Nachhaltigkeit und Personalisierung, um Ihre Ideen in 3D zu verwirklichen.", presentation_btn:"Mehr erfahren",
+    promo1_title:"Aktion -25%", promo1_text:"auf die Untersetzer-Kollektion bis 30. November", promo2_title:"Neu", promo2_text:"Blumentöpfe aus recyceltem PLA & natürlichen Tönen", promo3_title:"Kostenloser Workshop", promo3_text:"Einführung in den 3D-Druck am 22. November", promo4_title:"Kostenloser Versand", promo4_text:"ab 60€ Bestellwert",
+    footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck"
+  }
+};
+
+function applyTranslations(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    if(!key) return;
+    const text = (translations[lang] && translations[lang][key]) || translations['en'][key];
+    if(text) el.innerHTML = text;
+  });
+}
+
+/* set language and persist */
+function setLang(lang){
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+}
+
+/* dropdown & buttons */
+const langBtn = document.getElementById('langBtn');
+const dropdown = document.getElementById('langDropdown');
+
+langBtn.addEventListener('click', e=>{
+  const open = langBtn.classList.toggle('open');
+  dropdown.classList.toggle('show', open);
+  dropdown.setAttribute('aria-hidden', String(!open));
 });
 
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("visible");
+/* click on languages */
+dropdown.querySelectorAll('div').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const lang = el.dataset.lang;
+    setLang(lang);
+    dropdown.classList.remove('show');
+    langBtn.classList.remove('open');
   });
-},{threshold:0.2});
-obs.observe(document.getElementById("presentation"));
+});
+
+/* auto detect country -> language
+   using ipapi.co (no key required for basic info)
+*/
+async function autoDetectLang(){
+  try{
+    const res = await fetch('https://ipapi.co/json/');
+    if(!res.ok) throw new Error('no geo');
+    const data = await res.json();
+    const country = (data.country_code || '').toUpperCase();
+    let lang = 'en';
+    if(country === 'FR') lang = 'fr';
+    else if(country === 'DE') lang = 'de';
+    else if(country === 'CH') lang = 'de';
+    else if(country === 'IT') lang = 'en'; // fallback to English for Italy (or add 'it' later)
+    setLang(lang);
+  }catch(e){
+    setLang('en');
+  }
+}
+
+/* priority: saved choice */
+const saved = localStorage.getItem('lang');
+if(saved) setLang(saved);
+else autoDetectLang();
+
+/* header scroll effect + presentation observe */
+window.addEventListener('scroll', ()=>document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50));
+const obs = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') }) },{threshold:.2});
+obs.observe(document.getElementById('presentation'));
 </script>
 </body>
 </html>

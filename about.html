@@ -1,89 +1,101 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>À propos - VectorLab</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#FFFCF8; --text:#2D2D2D; --text-light:#666; --accent:#FFD8BE; --accent-hover:#FF9D87;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
-header{padding:25px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;position:sticky;top:0;background:var(--bg);z-index:1000;transition:0.3s;}
-header.scrolled{background:#fff;box-shadow:0 5px 20px rgba(0,0,0,0.05);}
-.logo{font-size:36px;font-weight:700;}
-nav a{margin-left:40px;color:var(--text);text-decoration:none;font-weight:500;position:relative;}
-nav a::after{content:'';position:absolute;width:0;height:2px;background:var(--accent-hover);left:0;bottom:-5px;transition:0.3s;}
-nav a:hover::after{width:100%;}
-
-section{max-width:1100px;margin:100px auto;padding:0 5%;line-height:1.8;}
-h1{font-size:46px;margin-bottom:20px;}
-h2{margin-top:50px;margin-bottom:15px;color:var(--accent-hover);}
-p{color:var(--text-light);margin-bottom:20px;}
-.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;margin-top:60px;}
-.card{background:white;border-radius:20px;padding:30px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
-.card img{width:100%;border-radius:15px;margin-bottom:15px;}
-footer{text-align:center;padding:80px 20px;color:var(--text-light);border-top:1px solid #ffe8db;}
-footer .links a{color:var(--text-light);text-decoration:none;margin:0 10px;transition:0.3s;}
-footer .links a:hover{color:var(--accent-hover);}
+:root{--bg:#FFFCF8;--text:#2D2D2D;--text-light:#666;--accent:#FFD8BE;--accent-hover:#FF9D87}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;z-index:1000}
+.logo{font-weight:700;font-size:34px}
+nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500}
+.lang-switch{position:absolute;right:24px;top:14px}
+.lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
+.lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s}
+.flag-en{left:0;z-index:1}.flag-fr{left:12px;z-index:2}.flag-de{left:24px;z-index:3}
+.lang-circles.open .flag-en{left:-70px}.lang-circles.open .flag-fr{left:0}.lang-circles.open .flag-de{left:70px}
+.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.lang-dropdown.show{display:block}
+section{max-width:1100px;margin:80px auto;padding:0 6%;line-height:1.7}
+h1{font-size:34px;margin-bottom:12px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:22px}
+.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.05);text-align:center}
+footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1px solid #ffe8db}
 </style>
 </head>
 <body>
-
 <header id="mainHeader">
-  <div class="logo">VectorLab</div>
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="discover.html">Découvrir</a>
-    <a href="about.html">À propos</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="logo">VectorLab</div>
+    <nav>
+      <a href="index.html" data-i18n="nav_home">Accueil</a>
+      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+      <a href="about.html" data-i18n="nav_about">À propos</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
+  </div>
+  <div class="lang-switch">
+    <div class="lang-circles" id="langBtn3">
+      <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
+      <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
+      <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+    </div>
+    <div class="lang-dropdown" id="langDropdown3">
+      <div data-lang="en">English</div>
+      <div data-lang="fr">Français</div>
+      <div data-lang="de">Deutsch</div>
+    </div>
+  </div>
 </header>
 
-<section>
-  <h1>Notre histoire</h1>
-  <p>Fondé en 2022, <strong>VectorLab</strong> est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.</p>
-  <p>Notre atelier, situé en France, s’engage à produire localement tout en innovant pour rendre l’impression 3D plus accessible, esthétique et écoresponsable.</p>
+<main>
+  <section>
+    <h1 data-i18n="about_title">Notre histoire</h1>
+    <p data-i18n="about_text">Fondé en 2022, VectorLab est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.</p>
 
-  <h2>Notre mission</h2>
-  <p>Offrir des créations sur mesure, alliant technologie, art et respect de l’environnement. Chaque pièce est imprimée avec précision, puis finie à la main pour garantir un rendu unique.</p>
-
-  <h2>Notre équipe</h2>
-  <div class="team">
-    <div class="card">
-      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Julien" alt="Julien">
-      <h3>Julien</h3>
-      <p>Designer & Fondateur</p>
+    <h2 data-i18n="team_title">Notre équipe</h2>
+    <div class="card-grid">
+      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Julien" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Julien</strong><div style="color:var(--text-light)">Designer & Fondateur</div></div>
+      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Clara" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Clara</strong><div style="color:var(--text-light)">Responsable production</div></div>
+      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Lucas" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Lucas</strong><div style="color:var(--text-light)">Développeur & R&D</div></div>
     </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Clara" alt="Clara">
-      <h3>Clara</h3>
-      <p>Responsable production</p>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/400x300/FFF8F3/FFD8BE?text=Lucas" alt="Lucas">
-      <h3>Lucas</h3>
-      <p>Développeur & R&D</p>
-    </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
-  <div class="links">
-    <a href="index.html">Accueil</a>|
-    <a href="discover.html">Découvrir</a>|
-    <a href="faq.html">FAQ</a>|
-    <a href="contact.html">Contact</a>
-  </div>
-  <p>© 2025 VectorLab — Fait avec passion en France</p>
+  <div class="links"><a href="index.html" data-i18n="nav_home">Accueil</a> | <a href="discover.html" data-i18n="nav_discover">Découvrir</a> | <a href="faq.html" data-i18n="nav_faq">FAQ</a> | <a href="contact.html" data-i18n="nav_contact">Contact</a></div>
+  <p data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</p>
 </footer>
 
 <script>
-window.addEventListener("scroll",()=>{document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50)});
+const translations = {
+  en:{nav_home:"Home",nav_discover:"Discover",nav_about:"About",nav_contact:"Contact",nav_faq:"FAQ",
+      about_title:"Our story", about_text:"Founded in 2022, VectorLab was born from a shared passion for design and additive manufacturing. We transform ideas into tangible objects using 3D printing, favoring sustainable materials and high-end finishes.",
+      team_title:"Our team", footer_text:"© 2025 VectorLab — Premium & custom 3D printing"},
+  fr:{nav_home:"Accueil",nav_discover:"Découvrir",nav_about:"À propos",nav_contact:"Contact",nav_faq:"FAQ",
+      about_title:"Notre histoire", about_text:"Fondé en 2022, VectorLab est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.",
+      team_title:"Notre équipe", footer_text:"© 2025 VectorLab — Fait avec passion en France"},
+  de:{nav_home:"Startseite",nav_discover:"Entdecken",nav_about:"Über uns",nav_contact:"Kontakt",nav_faq:"FAQ",
+      about_title:"Unsere Geschichte", about_text:"Gegründet 2022, entstand VectorLab aus einer gemeinsamen Leidenschaft für Design und additive Fertigung. Wir verwandeln Ideen in greifbare Objekte mittels 3D-Druck und setzen auf nachhaltige Materialien und hochwertige Oberflächen.",
+      team_title:"Unser Team", footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck"}
+};
+
+function applyTranslations(lang){
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.innerHTML = (translations[lang] && translations[lang][el.dataset.i18n]) || translations['en'][el.dataset.i18n]);
+}
+function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
+
+/* lang switch */
+const langBtn = document.getElementById('langBtn3');
+const dropdown = document.getElementById('langDropdown3');
+langBtn.addEventListener('click', ()=>{ langBtn.classList.toggle('open'); dropdown.classList.toggle('show'); });
+dropdown.querySelectorAll('div').forEach(el=>el.addEventListener('click', ()=>{ setLang(el.dataset.lang); dropdown.classList.remove('show'); langBtn.classList.remove('open'); }));
+
+async function autoDetect(){ try{ const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); let lang='en'; if(d.country_code==='FR') lang='fr'; else if(d.country_code==='DE'||d.country_code==='CH') lang='de'; setLang(localStorage.getItem('lang')||lang); }catch(e){ setLang(localStorage.getItem('lang')||'en'); } }
+const saved = localStorage.getItem('lang');
+if(saved) setLang(saved); else autoDetect();
 </script>
 </body>
 </html>
-
-
