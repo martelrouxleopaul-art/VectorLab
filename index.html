@@ -63,19 +63,50 @@ nav a:hover::after {width:100%;}
 }
 
 /* vague foncée animée */
+/* vague foncée discrète */
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(135deg,
-    rgba(255,157,135,0) 0%,
-    rgba(255,157,135,0.25) 50%,
-    rgba(255,157,135,0) 100%);
-  animation: waveMove 6s infinite linear;
+  top: 40%;              /* hauteur de la vague : à mi-hauteur */
+  left: -200px;          /* démarre hors de l’écran */
+  width: 300px;          /* largeur de la vague (fine) */
+  height: 60px;          /* épaisseur de la vague */
+  
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255,157,135,0.35) 0%,   /* centre foncé */
+    rgba(255,157,135,0.15) 50%,  /* adoucissement */
+    rgba(255,157,135,0) 100%     /* fade-out total */
+  );
+
+  border-radius: 50%;
+  filter: blur(25px);     /* effet doux / vague */
+  animation: waveSmall 5s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 1;
 }
+
+@keyframes waveSmall {
+  0% {
+    transform: translateX(-150%) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(50%) scale(1);
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150%) scale(0.8);
+    opacity: 0;
+  }
+}
+
 
 @keyframes waveMove {
   0% { transform: translateX(-50%) translateY(0); }
