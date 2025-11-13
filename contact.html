@@ -23,6 +23,7 @@ form{display:flex;flex-direction:column;gap:20px;text-align:left;}
 input,textarea{width:100%;padding:15px 20px;border:1px solid #ffe8db;border-radius:12px;font-size:16px;}
 button{background:var(--accent-hover);color:white;padding:15px 40px;border:none;border-radius:40px;font-size:17px;font-weight:600;cursor:pointer;transition:0.3s;}
 button:hover{transform:translateY(-3px);background:#ff8c6e;}
+.success-message{display:none;margin-top:20px;color:var(--accent-hover);font-weight:600;}
 footer{text-align:center;padding:80px 20px;color:var(--text-light);border-top:1px solid #ffe8db;}
 footer .links a{color:var(--text-light);text-decoration:none;margin:0 10px;transition:0.3s;}
 footer .links a:hover{color:var(--accent-hover);}
@@ -43,11 +44,13 @@ footer .links a:hover{color:var(--accent-hover);}
 <section>
   <h1>Contactez-nous</h1>
   <p>Une question, un projet ou une demande sur mesure ? Écrivez-nous !</p>
-  <form onsubmit="event.preventDefault(); alert('Message envoyé ! Merci ❤️');">
-    <input type="text" placeholder="Votre nom" required>
-    <input type="email" placeholder="Votre e-mail" required>
-    <textarea rows="6" placeholder="Votre message..." required></textarea>
+
+  <form action="https://formspree.io/f/xovyvzab" method="POST" id="contactForm">
+    <input type="text" name="name" placeholder="Votre nom" required>
+    <input type="email" name="email" placeholder="Votre e-mail" required>
+    <textarea name="message" rows="6" placeholder="Votre message..." required></textarea>
     <button type="submit">Envoyer</button>
+    <div class="success-message" id="successMsg">✅ Merci ! Votre message a été envoyé.</div>
   </form>
 </section>
 
@@ -62,7 +65,32 @@ footer .links a:hover{color:var(--accent-hover);}
 </footer>
 
 <script>
-window.addEventListener("scroll",()=>{document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50)});
+// Apparence du header au scroll
+window.addEventListener("scroll",()=>{
+  document.getElementById("mainHeader").classList.toggle("scrolled",window.scrollY>50);
+});
+
+// Message de confirmation
+const form = document.getElementById('contactForm');
+const msg = document.getElementById('successMsg');
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const data = new FormData(form);
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+  if (response.ok) {
+    form.reset();
+    msg.style.display = 'block';
+    setTimeout(()=> msg.style.display='none', 4000);
+  } else {
+    alert("Une erreur est survenue. Réessayez plus tard.");
+  }
+});
 </script>
+
 </body>
 </html>
