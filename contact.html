@@ -10,6 +10,7 @@
 body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
 header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffe8db;z-index:1000}
 .logo{font-weight:700;font-size:34px}
+nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500}
 /* new: account / language container */
 .header-actions{display:flex;align-items:center;gap:20px; /* Increased gap */ position:relative;right:0}
 .auth-btn{padding:8px 16px;border-radius:30px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
@@ -23,41 +24,42 @@ header{position:sticky;top:0;background:var(--bg);padding:18px 6%;display:flex;a
 .lang-switch{position:relative;right:0;top:0;z-index:3000; /* Increased z-index for fix */}
 .lang-circles{position:relative;width:44px;height:44px;cursor:pointer}
 .lang-circles img{width:44px;height:44px;border-radius:50%;position:absolute;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:all .45s}
+.flag-en{left:0;z-index:1}.flag-fr{left:12px;z-index:2}.flag-de{left:24px;z-index:3}
 .lang-circles.open .flag-en{left:-50px; /* Reduced from -70px for fix */}
-.lang-circles.open .flag-de{left:50px; /* Reduced from 70px for fix */}
-.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:0}
+.lang-circles.open .flag-fr{left:0}.lang-circles.open .flag-de{left:50px; /* Reduced from 70px for fix */}
+.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:-80px} /* CORRECTION APPLIQUÉE */
 .lang-dropdown.show{display:block}
 main{max-width:800px;margin:80px auto;padding:0 6%;text-align:center}
 form{display:flex;flex-direction:column;gap:16px;margin-top:12px}
 input,textarea{padding:12px 14px;border-radius:10px;border:1px solid #ffe8db;font-size:15px}
-button{background:var(--accent-hover);color:#fff;padding:12px 18px;border-radius:30px;border:none;font-weight:700;cursor:pointer}
-.success-message{display:none;color:green;margin-top:10px;font-weight:600}
-footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1px solid #ffe8db}
+button{background:var(--accent-hover);color:#fff;padding:12px 18px;border-radius:30px;border:none;font-weight:700;cursor:pointer;transition:background .2s;margin-top:8px}
+button:hover{background:#ff8c6e}
+.message{padding:10px;border-radius:8px;font-weight:600;margin-top:10px;display:none}
+.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+footer{text-align:center;padding:30px 6%;color:var(--text-light);border-top:1px solid #ffe8db;margin-top:60px}
 </style>
 </head>
 <body>
-<header id="mainHeader">
-  <div style="display:flex;align-items:center;gap:18px">
-    <div class="logo">VectorLab</div>
-    <nav>
-      <a href="index.html" data-i18n="nav_home">Accueil</a>
-      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
-      <a href="about.html" data-i18n="nav_about">À propos</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </nav>
-  </div>
-
+<header>
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html" data-i18n="nav_home">Accueil</a>
+    <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+    <a href="about.html" data-i18n="nav_about">À propos</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+  </nav>
   <div class="header-actions">
-    <button id="loginBtn4" class="auth-btn" data-i18n="auth_login">Se connecter</button>
-    <button id="signInBtn4" class="auth-btn" data-i18n="auth_signin">S'inscrire</button>
+    <div id="loginBtn4" class="auth-btn" data-i18n="auth_login">Se connecter</div>
+    <div id="signInBtn4" class="auth-btn" data-i18n="auth_signin">S'inscrire</div>
+    <div id="profileBtn4" class="auth-btn" style="display:none;" data-i18n="auth_profile">Mon Profil</div>
 
-    <button id="profileBtn4" class="auth-btn" style="display:none;" data-i18n="auth_profile">Mon Profil</button>
-    
     <div class="lang-switch">
       <div class="lang-circles" id="langBtn4">
-        <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
-        <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
-        <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+        <img src="https://flagcdn.com/40x30/gb.png" alt="English" class="flag-en">
+        <img src="https://flagcdn.com/40x30/fr.png" alt="Français" class="flag-fr">
+        <img src="https://flagcdn.com/40x30/de.png" alt="Deutsch" class="flag-de">
       </div>
       <div class="lang-dropdown" id="langDropdown4">
         <div data-lang="en">English</div>
@@ -67,67 +69,71 @@ footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1p
     </div>
   </div>
 </header>
-
 <main>
   <h1 data-i18n="contact_title">Contactez-nous</h1>
-  <p data-i18n="contact_sub">Une question, un projet ou une demande sur mesure ? Écrivez-nous !</p>
-
-  <form id="contactForm" action="https://formspree.io/f/xovyvzab" method="POST">
-    <input type="text" name="name" placeholder="Votre nom" required data-i18n-placeholder="placeholder_name">
-    <input type="email" name="email" placeholder="Votre e-mail" required data-i18n-placeholder="placeholder_email">
-    <textarea name="message" rows="6" placeholder="Votre message..." required data-i18n-placeholder="placeholder_message"></textarea>
+  <p data-i18n="contact_sub">Une question, un projet ou une demande individuelle? Écrivez-nous!</p>
+  <form id="contactForm" action="https://formspree.io/f/xnqewzkr" method="POST">
+    <input type="text" name="name" data-i18n="placeholder_name" placeholder="Votre Nom" required>
+    <input type="email" name="email" data-i18n="placeholder_email" placeholder="Votre Email" required>
+    <textarea name="message" rows="5" data-i18n="placeholder_message" placeholder="Votre message..." required></textarea>
     <button type="submit" data-i18n="contact_send">Envoyer</button>
-    <div class="success-message" id="successMsg">✅ Merci ! Votre message a été envoyé.</div>
   </form>
+  <div id="successMsg" class="message success"></div>
 </main>
-
-<footer>
-  <div class="links"><a href="index.html" data-i18n="nav_home">Accueil</a> | <a href="discover.html" data-i18n="nav_discover">Découvrir</a> | <a href="faq.html" data-i18n="nav_faq">FAQ</a></div>
-  <p data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</p>
-</footer>
-
+<footer data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</footer>
 <script>
+/* --- i18n --- */
 const translations = {
-  en:{nav_home:"Home",nav_discover:"Discover",nav_about:"About",nav_contact:"Contact",nav_faq:"FAQ",
-      contact_title:"Contact us", contact_sub:"Have a question, project or custom request? Write to us!",
-      contact_send:"Send", placeholder_name:"Your name", placeholder_email:"Your email", placeholder_message:"Your message...",
-      footer_text:"© 2025 VectorLab — Premium & custom 3D printing",
-      // New translations for account
-      auth_login:"Log In", auth_signin:"Sign Up", auth_profile:"My Profile"},
-  fr:{nav_home:"Accueil",nav_discover:"Découvrir",nav_about:"À propos",nav_contact:"Contact",nav_faq:"FAQ",
-      contact_title:"Contactez-nous", contact_sub:"Une question, un projet ou une demande sur mesure ? Écrivez-nous !",
-      contact_send:"Envoyer", placeholder_name:"Votre nom", placeholder_email:"Votre e-mail", placeholder_message:"Votre message...",
-      footer_text:"© 2025 VectorLab — Fait avec passion en France",
-      // New translations for account
-      auth_login:"Se connecter", auth_signin:"S'inscrire", auth_profile:"Mon Profil"},
-  de:{nav_home:"Startseite",nav_discover:"Entdecken",nav_about:"Über uns",nav_contact:"Kontakt",nav_faq:"FAQ",
-      contact_title:"Kontakt", contact_sub:"Eine Frage, ein Projekt oder eine individuelle Anfrage? Schreiben Sie uns!",
-      contact_send:"Senden", placeholder_name:"Ihr Name", placeholder_email:"Ihre E-Mail", placeholder_message:"Ihre Nachricht...",
-      footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
-      // New translations for account
-      auth_login:"Anmelden", auth_signin:"Registrieren", auth_profile:"Mein Profil"}
+  en:{
+    nav_home:"Home",nav_discover:"Discover",nav_about:"About",nav_contact:"Contact",nav_faq:"FAQ",
+    contact_title:"Get in Touch",
+    contact_sub:"A question, a project, or a custom request? Write to us!",
+    contact_send:"Send",
+    placeholder_name:"Your Name",
+    placeholder_email:"Your Email",
+    placeholder_message:"Your message...",
+    footer_text:"© 2025 VectorLab — Premium & custom 3D printing",
+    auth_login:"Log In", auth_signin:"Sign Up", auth_profile:"My Profile"
+  },
+  fr:{
+    nav_home:"Accueil",nav_discover:"Découvrir",nav_about:"À propos",nav_contact:"Contact",nav_faq:"FAQ",
+    contact_title:"Contactez-nous",
+    contact_sub:"Une question, un projet ou une demande individuelle? Écrivez-nous!",
+    contact_send:"Envoyer",
+    placeholder_name:"Votre Nom",
+    placeholder_email:"Votre Email",
+    placeholder_message:"Votre message...",
+    footer_text:"© 2025 VectorLab — Fait avec passion en France",
+    auth_login:"Se connecter", auth_signin:"S'inscrire", auth_profile:"Mon Profil"
+  },
+  de:{
+    nav_home:"Startseite",nav_discover:"Entdecken",nav_about:"Über uns",nav_contact:"Kontakt",nav_faq:"FAQ",
+    contact_title:"Kontakt",
+    contact_sub:"Eine Frage, ein Projekt oder eine individuelle Anfrage? Schreiben Sie uns!",
+    contact_send:"Senden",
+    placeholder_name:"Ihr Name",
+    placeholder_email:"Ihre E-Mail",
+    placeholder_message:"Ihre Nachricht...",
+    footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
+    auth_login:"Anmelden", auth_signin:"Registrieren", auth_profile:"Mein Profil"
+  }
 };
-
 function applyTranslations(lang){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.dataset.i18n;
-    el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key] || el.innerHTML;
-  });
-  // placeholders
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const key = el.dataset.i18nPlaceholder;
-    el.placeholder = (translations[lang] && translations[lang][key]) || translations['en'][key] || el.placeholder;
+    el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key];
   });
 }
-
-function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
-
-/* --- Authentication Logic (Redirection) --- */
+function setLang(lang){
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+}
+/* auth buttons */
 const loginBtn = document.getElementById('loginBtn4');
 const signInBtn = document.getElementById('signInBtn4');
 const profileBtn = document.getElementById('profileBtn4');
 
-function updateAuthButtons(isLoggedIn) {
+function updateAuthButtons(isLoggedIn){
   loginBtn.style.display = isLoggedIn ? 'none' : 'block';
   signInBtn.style.display = isLoggedIn ? 'none' : 'block';
   profileBtn.style.display = isLoggedIn ? 'block' : 'none';
@@ -178,8 +184,19 @@ form.addEventListener('submit', async (e)=>{
   e.preventDefault();
   const data = new FormData(form);
   const response = await fetch(form.action, { method: form.method, body: data, headers: {'Accept':'application/json'} });
-  if(response.ok){ form.reset(); msg.style.display='block'; setTimeout(()=>msg.style.display='none',4000); }
-  else{ alert('Une erreur est survenue. Réessayez plus tard.'); }
+  if(response.ok){
+    const lang = localStorage.getItem('lang') || 'fr';
+    const successMsg = translations[lang]['msg_success'] || translations['en']['msg_success'];
+    msg.innerHTML = successMsg;
+    msg.classList.add('success');
+    msg.style.display = 'block';
+    form.reset();
+  } else {
+    const errorMsg = translations[lang]['msg_error'] || translations['en']['msg_error'];
+    msg.innerHTML = errorMsg;
+    msg.classList.add('error');
+    msg.style.display = 'block';
+  }
 });
 </script>
 </body>

@@ -22,7 +22,7 @@ nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500}
 .lang-circles.open .flag-en{left:-50px;transform:translateY(-6px)}
 .lang-circles.open .flag-fr{left:0;transform:translateY(-2px)}
 .lang-circles.open .flag-de{left:50px;transform:translateY(-6px)}
-.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:0}
+.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:-80px} /* CORRECTION APPLIQUÉE */
 .lang-dropdown.show{display:block}
 
 /* Form Styles */
@@ -31,39 +31,35 @@ main{flex-grow:1;display:flex;justify-content:center;align-items:center;padding:
 h1{text-align:center;margin-bottom:24px;font-size:28px}
 form{display:flex;flex-direction:column;gap:16px}
 input{padding:12px 14px;border-radius:10px;border:1px solid #ffe8db;font-size:15px}
-.cta-button{background:var(--accent-hover);color:#fff;padding:12px 18px;border-radius:30px;border:none;font-weight:700;cursor:pointer;transition:background .2s}
-.cta-button:hover{background:#ff8c6e}
-.message{text-align:center;margin-top:10px;font-weight:600;display:none;padding:10px;border-radius:8px}
-.error{color:#D9534F;background:#F9EBEB;border:1px solid #E4C4C4}
-.success{color:green;background:#EBF9EB;border:1px solid #C4E4C4}
-.switch-auth{text-align:center;margin-top:20px;font-size:14px}
-.switch-auth a{color:var(--accent-hover);text-decoration:none;font-weight:600}
-
-/* Footer */
-footer{text-align:center;padding:30px 20px;color:var(--text-light);border-top:1px solid #ffe8db}
+button{background:var(--accent-hover);color:#fff;padding:14px 18px;border-radius:30px;border:none;font-weight:700;cursor:pointer;transition:background .2s;margin-top:10px}
+button:hover{background:#ff8c6e}
+.message{padding:12px;border-radius:8px;font-weight:600;margin-top:15px;text-align:center;display:none}
+.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.switch-form{text-align:center;margin-top:20px;font-size:14px}
+.switch-form a{color:var(--accent-hover);text-decoration:none;font-weight:600}
+footer{text-align:center;padding:30px 6%;color:var(--text-light);border-top:1px solid #ffe8db;margin-top:60px}
 </style>
 </head>
 <body>
-
 <header>
-  <div style="display:flex;align-items:center;gap:18px">
-    <div class="logo"><a href="index.html" style="text-decoration:none;color:inherit;">VectorLab</a></div>
-    <nav>
-      <a href="index.html" data-i18n="nav_home">Accueil</a>
-      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
-      <a href="about.html" data-i18n="nav_about">À propos</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </nav>
-  </div>
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html" data-i18n="nav_home">Accueil</a>
+    <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+    <a href="about.html" data-i18n="nav_about">À propos</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+  </nav>
 
   <div class="header-actions">
     <div class="lang-switch">
       <div class="lang-circles" id="langBtn7">
-        <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
-        <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
-        <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+        <img src="https://flagcdn.com/40x30/gb.png" alt="English" class="flag-en">
+        <img src="https://flagcdn.com/40x30/fr.png" alt="Français" class="flag-fr">
+        <img src="https://flagcdn.com/40x30/de.png" alt="Deutsch" class="flag-de">
       </div>
-      <div class="lang-dropdown" id="langDropdown7">
+      <div class="lang-dropdown" id="langDropdown7" role="menu" aria-hidden="true">
         <div data-lang="en">English</div>
         <div data-lang="fr">Français</div>
         <div data-lang="de">Deutsch</div>
@@ -71,49 +67,45 @@ footer{text-align:center;padding:30px 20px;color:var(--text-light);border-top:1p
     </div>
   </div>
 </header>
-
 <main>
   <div class="form-container">
-    <h1 data-i18n="signin_title">Créer votre compte VectorLab</h1>
+    <h1 data-i18n="signin_title">Créer un compte</h1>
     <form id="signInForm">
-      <input type="text" id="signInName" placeholder="Nom complet" required data-i18n-placeholder="placeholder_name">
-      <input type="email" id="signInEmail" placeholder="Email" required data-i18n-placeholder="placeholder_email">
-      <input type="password" id="signInPassword" placeholder="Mot de passe (min 6 caractères)" required data-i18n-placeholder="placeholder_password">
-      <button type="submit" class="cta-button" data-i18n="auth_signin">S'inscrire</button>
-      <div id="signInMessage" class="message"></div>
+      <input type="text" id="signInName" data-i18n="placeholder_name" placeholder="Nom Complet" required>
+      <input type="email" id="signInEmail" data-i18n="placeholder_email" placeholder="Email" required>
+      <input type="password" id="signInPassword" data-i18n="placeholder_password" placeholder="Mot de passe (min 6 caractères)" required minlength="6">
+      <button type="submit" data-i18n="auth_signin">S'inscrire</button>
     </form>
-    <div class="switch-auth">
-      <span data-i18n="signin_has_account">Déjà un compte ?</span>
-      <a href="login.html" data-i18n="auth_login">Se connecter</a>
-    </div>
+    <div id="signInMessage" class="message"></div>
+    <div class="switch-form"><span data-i18n="switch_login_text">Vous avez déjà un compte?</span> <a href="login.html" data-i18n="auth_login">Se connecter</a></div>
   </div>
 </main>
-
-<footer>
-  <p data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</p>
-</footer>
-
+<footer>&copy; 2025 VectorLab</footer>
 <script>
+/* --- i18n --- */
 const translations = {
-  en: {
+  en:{
     nav_home:"Home", nav_discover:"Discover", nav_about:"About", nav_contact:"Contact", nav_faq:"FAQ",
-    footer_text:"© 2025 VectorLab — Premium & custom 3D printing",
-    signin_title:"Create your VectorLab account", auth_signin:"Sign Up", signin_has_account:"Already have an account?",
-    placeholder_name:"Full Name", placeholder_email:"Email", placeholder_password:"Password (min 6 chars)", auth_login:"Log In",
-    msg_success:"Account created successfully! Redirecting to login...", msg_error:"Please fill in all fields correctly (Password min 6 chars)."
+    signin_title:"Create an account",
+    placeholder_name:"Full Name", placeholder_email:"Email", placeholder_password:"Password (min 6 chars)",
+    auth_signin:"Sign Up", auth_login:"Log In",
+    switch_login_text:"Already have an account?",
+    msg_success:"Account successfully created! Redirecting to login...", msg_error:"Please fill in all fields correctly (Password min 6 chars)."
   },
-  fr: {
+  fr:{
     nav_home:"Accueil", nav_discover:"Découvrir", nav_about:"À propos", nav_contact:"Contact", nav_faq:"FAQ",
-    footer_text:"© 2025 VectorLab — Fait avec passion en France",
-    signin_title:"Créer votre compte VectorLab", auth_signin:"S'inscrire", signin_has_account:"Déjà un compte ?",
-    placeholder_name:"Nom complet", placeholder_email:"Email", placeholder_password:"Mot de passe (min 6 caractères)", auth_login:"Se connecter",
-    msg_success:"Compte créé avec succès ! Redirection vers la connexion...", msg_error:"Veuillez remplir tous les champs correctement (Mot de passe min 6 caractères)."
+    signin_title:"Créer un compte",
+    placeholder_name:"Nom Complet", placeholder_email:"Email", placeholder_password:"Mot de passe (min 6 caractères)",
+    auth_signin:"S'inscrire", auth_login:"Se connecter",
+    switch_login_text:"Vous avez déjà un compte?",
+    msg_success:"Compte créé avec succès! Redirection vers la connexion...", msg_error:"Veuillez remplir tous les champs correctement (Mot de passe min 6 caractères)."
   },
-  de: {
+  de:{
     nav_home:"Startseite", nav_discover:"Entdecken", nav_about:"Über uns", nav_contact:"Kontakt", nav_faq:"FAQ",
-    footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
-    signin_title:"Erstellen Sie Ihr VectorLab-Konto", auth_signin:"Registrieren", signin_has_account:"Haben Sie bereits ein Konto?",
-    placeholder_name:"Vollständiger Name", placeholder_email:"E-Mail", placeholder_password:"Passwort (mind. 6 Zeichen)", auth_login:"Anmelden",
+    signin_title:"Konto erstellen",
+    placeholder_name:"Vollständiger Name", placeholder_email:"E-Mail", placeholder_password:"Passwort (mind. 6 Zeichen)",
+    auth_signin:"Registrieren", auth_login:"Anmelden",
+    switch_login_text:"Sie haben bereits ein Konto?",
     msg_success:"Konto erfolgreich erstellt! Weiterleitung zur Anmeldung...", msg_error:"Bitte füllen Sie alle Felder korrekt aus (Passwort mind. 6 Zeichen)."
   }
 };
@@ -121,14 +113,25 @@ const translations = {
 function applyTranslations(lang){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.dataset.i18n;
-    el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key];
+    // Check if the element should be updated with innerHTML or a placeholder
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        const placeholderKey = 'placeholder_' + key.replace('placeholder_', '');
+        el.placeholder = (translations[lang] && translations[lang][placeholderKey]) || translations['en'][placeholderKey];
+    } else {
+        el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key];
+    }
   });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const key = el.dataset.i18nPlaceholder;
-    el.placeholder = (translations[lang] && translations[lang][key]) || translations['en'][key];
-  });
+
+  // Manually handle placeholders for form inputs
+  document.getElementById('signInName').placeholder = translations[lang]['placeholder_name'] || translations['en']['placeholder_name'];
+  document.getElementById('signInEmail').placeholder = translations[lang]['placeholder_email'] || translations['en']['placeholder_email'];
+  document.getElementById('signInPassword').placeholder = translations[lang]['placeholder_password'] || translations['en']['placeholder_password'];
 }
-function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
+
+function setLang(lang){
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+}
 
 /* --- Auth Form Logic --- */
 document.getElementById('signInForm').addEventListener('submit', (e) => {
@@ -138,6 +141,7 @@ document.getElementById('signInForm').addEventListener('submit', (e) => {
   const password = document.getElementById('signInPassword').value;
   const messageEl = document.getElementById('signInMessage');
   const lang = localStorage.getItem('lang') || 'fr';
+
   const successMsg = translations[lang]['msg_success'] || translations['en']['msg_success'];
   const errorMsg = translations[lang]['msg_error'] || translations['en']['msg_error'];
 
@@ -176,12 +180,7 @@ dropdown.querySelectorAll('div').forEach(el=>el.addEventListener('click', ()=>{
 
 /* Init */
 const saved = localStorage.getItem('lang');
-if(saved) setLang(saved);
-else {
-  if (navigator.language.startsWith('fr')) setLang('fr');
-  else if (navigator.language.startsWith('de')) setLang('de');
-  else setLang('en');
-}
+if(saved) setLang(saved); else applyTranslations('fr'); // We don't need auto-detect here
 </script>
 </body>
 </html>

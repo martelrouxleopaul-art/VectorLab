@@ -29,38 +29,39 @@ nav a{margin-left:30px;text-decoration:none;color:var(--text);font-weight:500}
 .flag-en{left:0;z-index:1}.flag-fr{left:12px;z-index:2}.flag-de{left:24px;z-index:3}
 .lang-circles.open .flag-en{left:-50px; /* Reduced from -70px for fix */}
 .lang-circles.open .flag-fr{left:0}.lang-circles.open .flag-de{left:50px; /* Reduced from 70px for fix */}
-.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:0}
+.lang-dropdown{display:none;background:#fff;padding:8px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.08);position:absolute;right:-80px} /* CORRECTION APPLIQUÉE */
 .lang-dropdown.show{display:block}
 section{max-width:1100px;margin:80px auto;padding:0 6%;line-height:1.7}
-h1{font-size:34px;margin-bottom:12px}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:22px}
-.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.05);text-align:center}
-footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1px solid #ffe8db}
+h1{font-size:42px;margin-bottom:30px}
+.team{display:flex;justify-content:space-around;margin-top:40px;text-align:center}
+.member{width:30%;max-width:250px;background:#fff;padding:20px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.member img{width:100px;height:100px;border-radius:50%;margin-bottom:15px;object-fit:cover;border:3px solid var(--accent)}
+.member h3{font-size:20px;margin-bottom:5px}
+.member p{color:var(--text-light);font-size:14px}
+footer{text-align:center;padding:30px 6%;color:var(--text-light);border-top:1px solid #ffe8db;margin-top:60px}
 </style>
 </head>
 <body>
-<header id="mainHeader">
-  <div style="display:flex;align-items:center;gap:18px">
-    <div class="logo">VectorLab</div>
-    <nav>
-      <a href="index.html" data-i18n="nav_home">Accueil</a>
-      <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
-      <a href="about.html" data-i18n="nav_about">À propos</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </nav>
-  </div>
-  
-  <div class="header-actions">
-    <button id="loginBtn3" class="auth-btn" data-i18n="auth_login">Se connecter</button>
-    <button id="signInBtn3" class="auth-btn" data-i18n="auth_signin">S'inscrire</button>
+<header>
+  <div class="logo">VectorLab</div>
+  <nav>
+    <a href="index.html" data-i18n="nav_home">Accueil</a>
+    <a href="discover.html" data-i18n="nav_discover">Découvrir</a>
+    <a href="about.html" data-i18n="nav_about">À propos</a>
+    <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+  </nav>
 
-    <button id="profileBtn3" class="auth-btn" style="display:none;" data-i18n="auth_profile">Mon Profil</button>
-    
+  <div class="header-actions">
+    <div id="loginBtn3" class="auth-btn" data-i18n="auth_login">Se connecter</div>
+    <div id="signInBtn3" class="auth-btn" data-i18n="auth_signin">S'inscrire</div>
+    <div id="profileBtn3" class="auth-btn" style="display:none;" data-i18n="auth_profile">Mon Profil</div>
+
     <div class="lang-switch">
       <div class="lang-circles" id="langBtn3">
-        <img src="https://flagcdn.com/48x36/gb.png" class="flag-en" alt="EN">
-        <img src="https://flagcdn.com/48x36/fr.png" class="flag-fr" alt="FR">
-        <img src="https://flagcdn.com/48x36/de.png" class="flag-de" alt="DE">
+        <img src="https://flagcdn.com/40x30/gb.png" alt="English" class="flag-en">
+        <img src="https://flagcdn.com/40x30/fr.png" alt="Français" class="flag-fr">
+        <img src="https://flagcdn.com/40x30/de.png" alt="Deutsch" class="flag-de">
       </div>
       <div class="lang-dropdown" id="langDropdown3">
         <div data-lang="en">English</div>
@@ -70,56 +71,93 @@ footer{text-align:center;padding:60px 20px;color:var(--text-light);border-top:1p
     </div>
   </div>
 </header>
-
 <main>
   <section>
     <h1 data-i18n="about_title">Notre histoire</h1>
     <p data-i18n="about_text">Fondé en 2022, VectorLab est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.</p>
 
-    <h2 data-i18n="team_title">Notre équipe</h2>
-    <div class="card-grid">
-      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Julien" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Julien</strong><div style="color:var(--text-light)">Designer & Fondateur</div></div>
-      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Clara" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Clara</strong><div style="color:var(--text-light)">Responsable production</div></div>
-      <div class="card"><img src="https://via.placeholder.com/320x220/FFF8F3/FFD8BE?text=Lucas" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><strong>Lucas</strong><div style="color:var(--text-light)">Développeur & R&D</div></div>
+    <h2 data-i18n="team_title" style="margin-top:60px;text-align:center">Notre équipe</h2>
+    <div class="team">
+      <div class="member">
+        <img src="https://via.placeholder.com/100/FFD8BE/2D2D2D?text=JD" alt="Jean Dubois">
+        <h3>Jean Dubois</h3>
+        <p>Fondateur & Chef de Design</p>
+      </div>
+      <div class="member">
+        <img src="https://via.placeholder.com/100/FFD8BE/2D2D2D?text=MT" alt="Marie Dupont">
+        <h3>Marie Tessier</h3>
+        <p>Responsable Production 3D</p>
+      </div>
+      <div class="member">
+        <img src="https://via.placeholder.com/100/FFD8BE/2D2D2D?text=CP" alt="Claire Petit">
+        <h3>Claire Perrin</h3>
+        <p>Support Client & Logistique</p>
+      </div>
     </div>
   </section>
 </main>
-
-<footer>
-  <div class="links"><a href="index.html" data-i18n="nav_home">Accueil</a> | <a href="discover.html" data-i18n="nav_discover">Découvrir</a> | <a href="faq.html" data-i18n="nav_faq">FAQ</a> | <a href="contact.html" data-i18n="nav_contact">Contact</a></div>
-  <p data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</p>
-</footer>
-
+<footer data-i18n="footer_text">© 2025 VectorLab — Fait avec passion en France</footer>
 <script>
+/* --- i18n --- */
 const translations = {
-  en:{nav_home:"Home",nav_discover:"Discover",nav_about:"About",nav_contact:"Contact",nav_faq:"FAQ",
-      about_title:"Our story", about_text:"Founded in 2022, VectorLab was born from a shared passion for design and additive manufacturing. We transform ideas into tangible objects using 3D printing, favoring sustainable materials and high-end finishes.",
-      team_title:"Our team", footer_text:"© 2025 VectorLab — Premium & custom 3D printing",
-      // New translations for account
-      auth_login:"Log In", auth_signin:"Sign Up", auth_profile:"My Profile"},
-  fr:{nav_home:"Accueil",nav_discover:"Découvrir",nav_about:"À propos",nav_contact:"Contact",nav_faq:"FAQ",
-      about_title:"Notre histoire", about_text:"Fondé en 2022, VectorLab est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.",
-      team_title:"Notre équipe", footer_text:"© 2025 VectorLab — Fait avec passion en France",
-      // New translations for account
-      auth_login:"Se connecter", auth_signin:"S'inscrire", auth_profile:"Mon Profil"},
-  de:{nav_home:"Startseite",nav_discover:"Entdecken",nav_about:"Über uns",nav_contact:"Kontakt",nav_faq:"FAQ",
-      about_title:"Unsere Geschichte", about_text:"Gegründet 2022, entstand VectorLab aus einer gemeinsamen Leidenschaft für Design und additive Fertigung. Wir verwandeln Ideen in greifbare Objekte mittels 3D-Druck und setzen auf nachhaltige Materialien und hochwertige Oberflächen.",
-      team_title:"Unser Team", footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
-      // New translations for account
-      auth_login:"Anmelden", auth_signin:"Registrieren", auth_profile:"Mein Profil"}
+  en:{
+    nav_home:"Home",nav_discover:"Discover",nav_about:"About",nav_contact:"Contact",nav_faq:"FAQ",
+    about_title:"Our Story",
+    about_text:"Founded in 2022, VectorLab was born from a shared passion for design and additive manufacturing. We transform ideas into concrete objects using 3D printing, prioritizing sustainable materials and premium finishes.",
+    team_title:"Our Team",
+    footer_text:"© 2025 VectorLab — Made with passion in France",
+    // New translations for account
+    auth_login:"Log In", auth_signin:"Sign Up", auth_profile:"My Profile"
+  },
+  fr:{
+    nav_home:"Accueil",nav_discover:"Découvrir",nav_about:"À propos",nav_contact:"Contact",nav_faq:"FAQ",
+    about_title:"Notre histoire",
+    about_text:"Fondé en 2022, VectorLab est né d’une passion commune pour le design et la fabrication additive. Nous transformons des idées en objets concrets grâce à l’impression 3D, en privilégiant des matériaux durables et des finitions haut de gamme.",
+    team_title:"Notre équipe",
+    footer_text:"© 2025 VectorLab — Fait avec passion en France",
+    // New translations for account
+    auth_login:"Se connecter", auth_signin:"S'inscrire", auth_profile:"Mon Profil"
+  },
+  de:{
+    nav_home:"Startseite",nav_discover:"Entdecken",nav_about:"Über uns",nav_contact:"Kontakt",nav_faq:"FAQ",
+    about_title:"Unsere Geschichte",
+    about_text:"VectorLab wurde 2022 aus einer gemeinsamen Leidenschaft für Design und additive Fertigung gegründet. Wir verwandeln Ideen in konkrete Objekte mittels 3D-Druck, wobei wir nachhaltige Materialien und hochwertige Oberflächen bevorzugen.",
+    team_title:"Unser Team",
+    footer_text:"© 2025 VectorLab — Premium & maßgeschneiderter 3D-Druck",
+    // New translations for account
+    auth_login:"Anmelden", auth_signin:"Registrieren", auth_profile:"Mein Profil"
+  }
 };
-
 function applyTranslations(lang){
-  document.querySelectorAll('[data-i18n]').forEach(el=>el.innerHTML = (translations[lang] && translations[lang][el.dataset.i18n]) || translations['en'][el.dataset.i18n]);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    el.innerHTML = (translations[lang] && translations[lang][key]) || translations['en'][key];
+  });
 }
-function setLang(lang){ localStorage.setItem('lang', lang); applyTranslations(lang); }
+function setLang(lang){
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+}
+/* auto-detect */
+async function autoDetect(){
+  try{
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    let lang='fr';
+    if(d.country_code==='DE'||d.country_code==='CH') lang='de';
+    else if(d.country_code!=='FR') lang = 'en';
+    setLang(localStorage.getItem('lang')||lang);
+  }catch(e){ setLang(localStorage.getItem('lang')||'fr'); }
+}
+const saved = localStorage.getItem('lang');
+if(saved) setLang(saved); else autoDetect();
 
-/* --- Authentication Logic (Redirection) --- */
+/* auth buttons */
 const loginBtn = document.getElementById('loginBtn3');
 const signInBtn = document.getElementById('signInBtn3');
 const profileBtn = document.getElementById('profileBtn3');
 
-function updateAuthButtons(isLoggedIn) {
+function updateAuthButtons(isLoggedIn){
   loginBtn.style.display = isLoggedIn ? 'none' : 'block';
   signInBtn.style.display = isLoggedIn ? 'none' : 'block';
   profileBtn.style.display = isLoggedIn ? 'block' : 'none';
@@ -160,8 +198,8 @@ async function autoDetect(){
     setLang(localStorage.getItem('lang')||lang);
   }catch(e){ setLang(localStorage.getItem('lang')||'fr'); }
 }
-const saved = localStorage.getItem('lang');
-if(saved) setLang(saved); else autoDetect();
+const savedLang = localStorage.getItem('lang');
+if(savedLang) setLang(savedLang); else autoDetect();
 </script>
 </body>
 </html>
